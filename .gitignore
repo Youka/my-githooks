@@ -1,0 +1,9 @@
+# IDE settings
+.vscode
+.idea
+
+# Caches
+.gradle
+
+# Output
+build
