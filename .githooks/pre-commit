@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Input arguments
+CHANGED_FILES=$(git diff --staged --diff-filter=AM --name-only)
+CHANGED_FILES_N=$(echo "$CHANGED_FILES" | wc -l)
+
+# Check number of changed files
+CHANGED_FILES_MAX=20
+if (( CHANGED_FILES_N > CHANGED_FILES_MAX )); then
+	echo -e "You intended to add or modify >$CHANGED_FILES_MAX ($CHANGED_FILES_N) files in a single commit!" \
+		"\nFiles:\n---\n$CHANGED_FILES\n---" \
+		'\nPlease split into multiple commits for a better git history.' \
+		'\n(You can skip this check by flag '\''--no-verify'\'' IF you are absolutely sure!)' \
+		>&2
+	exit 1
+fi
