@@ -41,7 +41,7 @@ if (!isCiEnvironment) {
         GithooksPath.check()
     } catch(exception: IOException) {
         System.err.run {
-            println("GithooksPath check failed (see stacktrace below):")
+            println("Githooks path check failed (see stacktrace below):")
             exception.printStackTrace(this)
         }
     }

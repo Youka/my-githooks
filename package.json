@@ -1,0 +1,7 @@
+{
+  "name": "my-githooks",
+  "version": "1.0.0",
+  "scripts": {
+    "preinstall": "node scripts/githooks"
+  }
+}
