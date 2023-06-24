@@ -7,6 +7,7 @@ This project is for now...
 * A minimal [npm](https://www.npmjs.com/) project with git hook activation defined in [scripts/githooks.js](scripts/githooks.js) (triggered by [package.json](package.json))
 * A git hook to check the format of commit messages defined in [.githooks/commit-msg](.githooks/commit-msg)
 * A git hook to check the number of changed files in commits defined in [.githooks/pre-commit](.githooks/pre-commit)
+* A git hook to check the project state before pushes defined in [.githooks/pre-push](.githooks/pre-push)
 
 ## Usage
 * **Gradle:** Load gradle in your IDE or run any task (e.g. `gradlew tasks`)...
@@ -14,5 +15,8 @@ This project is for now...
 
 ...so [.githooks](.githooks) is set as your git hooks directory (entry can be found in [local git config](.git/config)).
 
-[Commit](https://git-scm.com/docs/git-commit) any change with a message (`-m`) or many changes with _added_ or _modified_ files to see how hooks **commit-msg** and **pre-commit** are working.  
+[Commit](https://git-scm.com/docs/git-commit) any change with a message (`-m`) to see how hook **commit-msg** is working.  
+Commit many changes with _added_ or _modified_ files to see how hook **pre-commit** is working.  
+Push commits while your build system (gradle/npm) has a `check` task/script to see how hook **pre-push** is working.
+
 Edit these hook files as needed for your project.

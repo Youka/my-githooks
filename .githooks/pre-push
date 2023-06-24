@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Exit on failed commands
+set -e
+
+# Check with gradle
+if [[ -f gradlew ]] ; then
+    echo 'Gradle project detected (found file '\''gradlew'\'').'
+    CHECK_TASK=check
+    echo "Try gradle task '$CHECK_TASK'..."
+    if ./gradlew tasks | grep "^$CHECK_TASK -" >/dev/null; then
+        ./gradlew $CHECK_TASK
+    else
+        echo "Gradle task '$CHECK_TASK' not found." >&2
+    fi
+fi
+
+# Check with npm
+if [[ -f package.json ]] ; then
+    echo 'NPM project detected (found file '\''package.json'\'').'
+    CHECK_SCRIPT=check
+    echo "Try npm script '$CHECK_SCRIPT'..."
+    if npm run | grep "^  $CHECK_SCRIPT$" >/dev/null; then
+        npm run $CHECK_SCRIPT
+    else
+        echo "NPM script '$CHECK_SCRIPT' not found." >&2
+    fi
+fi
