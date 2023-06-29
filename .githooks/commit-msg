@@ -12,8 +12,12 @@ echo_error () {
 
 # Validate message payload (line 1)
 MSG_LINE_1=$(echo "$MSG" | head -n1)
+MSG_LINE_1_N=${#MSG_LINE_1}
+MSG_LINE_1_MAX=80
 REGEX_LINE_1='^(Merge |PJ-[0-9]+: [a-z])'
-if ! [[ $MSG_LINE_1 =~ $REGEX_LINE_1 ]]; then
+if (( MSG_LINE_1_N > MSG_LINE_1_MAX )); then
+  echo_error "First line must not have >$MSG_LINE_1_MAX ($MSG_LINE_1_N) characters!" "$MSG_LINE_1"
+elif ! [[ $MSG_LINE_1 =~ $REGEX_LINE_1 ]]; then
   echo_error "First line must match pattern '$REGEX_LINE_1'!" "$MSG_LINE_1"
 fi
 
