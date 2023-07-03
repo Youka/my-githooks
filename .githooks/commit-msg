@@ -14,7 +14,7 @@ echo_error () {
 MSG_LINE_1=$(echo "$MSG" | head -n1)
 MSG_LINE_1_N=${#MSG_LINE_1}
 MSG_LINE_1_MAX=80
-REGEX_LINE_1='^(Merge |PJ-[0-9]+: [a-z])'
+REGEX_LINE_1='^(Merge |Revert |PJ-[[:digit:]]+: [[:lower:]].*[\.]$)'
 if (( MSG_LINE_1_N > MSG_LINE_1_MAX )); then
   echo_error "First line must not have >$MSG_LINE_1_MAX ($MSG_LINE_1_N) characters!" "$MSG_LINE_1"
 elif ! [[ $MSG_LINE_1 =~ $REGEX_LINE_1 ]]; then
@@ -32,7 +32,7 @@ fi
 # Validate message details (lines 3+)
 if (( MSG_LINES_N >= 3 )); then
   MSG_LINE_3=$(echo "$MSG" | tail -n+3)
-  REGEX_LINE_3='^[A-Z].*\.$'
+  REGEX_LINE_3='^[[:upper:]].*\.$'
   if ! [[ $MSG_LINE_3 =~ $REGEX_LINE_3 ]]; then
     echo_error "Third line and those after must match pattern '$REGEX_LINE_3'!"  "$MSG_LINE_3"
   fi
